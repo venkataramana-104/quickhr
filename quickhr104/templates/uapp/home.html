@@ -1,0 +1,556 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUICK HR</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hrms.css' %}">
+    {% block extra_css %}{% endblock %}
+    <style>
+        body{
+            background-color: whitesmoke;
+        }
+        /* Sidebar styles */
+        .sidebar {
+            background-color: white;
+            color: black;
+            height: 100vh; /* Full height */
+            position: fixed; /* Fixed sidebar */
+            top: 0;
+            left: 0;
+            width: 250px;
+            overflow-y: auto; /* Scroll if content overflows */
+            transition: left 0.3s;
+            z-index: 1000; /* Ensures it is on top */
+        }
+
+        .sidebar .nav-link {
+            color: black;
+        }
+
+        .sidebar .nav-link:hover {
+            color: #007bff;
+        }
+
+        /* Scroll Down Button */
+        .scroll-down-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .scroll-down-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive sidebar */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px; /* Hide on mobile */
+            }
+
+            .sidebar.active {
+                left: 0; /* Show on mobile */
+            }
+
+            .sidebar-toggle {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                padding: 10px;
+                background-color: whitesmoke;
+                border: none;
+                cursor: pointer;
+                z-index: 1001;
+            }
+        }
+
+        /* Adjust content margin to account for the sidebar */
+        .content {
+            margin-left: 250px;
+            transition: margin-left 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 0;
+            }
+        }
+
+        /* Responsive header */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                margin-top: 10px;
+            }
+            .navbar-collapse {
+                margin-top: 10px;
+            }
+            .form-inline {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+
+        /* Responsive footer */
+        .footer {
+            background-color: white;
+            padding: 10px 0;
+            position: relative;
+            top: 310px;
+        }
+
+        .footer .row {
+            margin: 0;
+        }
+
+        .footer div {
+            padding: 5px;
+            text-align: center;
+        }
+
+        /* Adjustments for screens wider than 768px */
+        @media (min-width: 769px) {
+            .footer .col-md-4 {
+                text-align: left; /* Align left for larger screens */
+            }
+        }
+
+        /* Adjustments for screens smaller than 768px */
+        @media (max-width: 768px) {
+            .footer .col-md-4 {
+                text-align: center;
+                margin-bottom: 10px;
+                width: 100%; /* Ensures the columns stack on top of each other */
+            }
+        }
+        .navbar-brand{
+            padding-left: 40px;
+        }
+
+/*table*/
+
+    .employee-container {
+        margin: 20px 0;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .employee-table th,
+    .employee-table td {
+        padding: 8px 12px;
+        text-align: left;
+    }
+
+    .employee-table th {
+        background-color: #f2f2f2;
+    }
+
+    @media (max-width: 768px) {
+        .employee-table th,
+        .employee-table td {
+            padding: 6px 8px;
+        }
+
+        .employee-table th {
+            font-size: 14px;
+        }
+
+        .employee-table td {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .employee-table th,
+        .employee-table td {
+            display: block;
+            text-align: right;
+        }
+
+        .employee-table th::before {
+            content: attr(data-title);
+            float: left;
+            font-weight: bold;
+        }
+
+        .employee-table th,
+        .employee-table td {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .employee-table th:last-child,
+        .employee-table td:last-child {
+            border-bottom: 0;
+        }
+    }
+
+
+
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <button class="navbar-toggler sidebar-toggle" type="button">
+            <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+           
+            <ul class="navbar-nav ml-auto">
+                 <li class="nav-item"><a class="nav-link" href="#">Demo(o)Essentials(@)PTE'LTD</a></li>
+                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-plus"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-envelope"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-globe"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">English</a>
+                        <a class="dropdown-item" href="#">Telugu</a>
+                        <a class="dropdown-item" href="#">Hindi</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="menuDropdown">
+                        <h5>GENERAL</h5>
+                        <a class="dropdown-item" href="#"><i class="fas fa-user"></i> Self Service</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-exchange-alt"></i> Switch Company</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <h5>RESOURCES</h5>
+                        <a class="dropdown-item" href="#"><i class="fas fa-bullhorn"></i> Announcement</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-book"></i> Handbook</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-tools"></i> Enhancements</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-book-open"></i> Guide</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-question-circle"></i> FAQs</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-headset"></i> Support</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-file-alt"></i> Audit logs</a>
+                        <h5>NOTIFICATIONS</h5>
+                        <a class="dropdown-item" href="#"><i class="fas fa-calendar-alt"></i> Leave</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-file-invoice"></i> Claim</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="nav flex-column">
+                <li class="sidebar-item"><a class="nav-link active" href="/dashboard1"><img src="{% static 'images/logo.png' %}" width="130px" height="40px" class="logo" alt="Logo"></a></li>
+                <li class="sidebar-item"><a class="nav-link" href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="sidebar-item"><a class="nav-link" href="/employees"><i class="fas fa-users"></i> Employees</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/leave"><i class="fas fa-calendar-alt"></i> Leave</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/claim"><i class="fas fa-file-alt"></i> Claim</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/timesheet"><i class="fas fa-clock"></i> Timesheets</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/payroll"><i class="fas fa-money-bill-wave"></i> Payroll</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/report"><i class="fas fa-chart-line"></i> Report</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/setting"><i class="fas fa-cogs"></i> Settings</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/expanses"><i class="fas fa-receipt"></i> Expenses</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="#"><i class="fas fa-comment-alt"></i> Feedback</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="#"><i class="fas fa-poll"></i> Polling</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/security"><i class="fas fa-shield-alt"></i> Security</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/appraisal"><i class="fas fa-star"></i> Appraisal</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Recruitment</a></li>
+                    <li class="sidebar-item"><a class="nav-link" href="/elearning"><i class="fas fa-book"></i> E-Learning</a></li>
+            </ul>
+            <button class="scroll-down-btn">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+
+        <!-- Main content -->
+        <div class="content">
+            <!-- Your main content goes here -->
+         {% block body_block %}
+<center>
+<div class="employee-container">
+    <h2>Employee Data</h2>
+    <div class="table-responsive">
+        <table border='2' class="employee-table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>Position</th>
+                    <th>Gender</th>
+                    <th>Date of Hire</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emp in emp %}
+                <tr>
+                    <td>{{ emp.first_name }}</td>
+                    <td>{{ emp.last_name }}</td>
+                    <td>{{ emp.email }}</td>
+                    <td>{{ emp.department }}</td>
+                    <td>{{ emp.role }}</td>
+                    <td>{{ emp.position }}</td>
+                    <td>{{ emp.gender }}</td>
+                    <td>{{ emp.joining_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="employee-container">
+    <h2>Department Data</h2>
+    <div class="table-responsive">
+        <table border='2' class="employee-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Department Name</th>
+                    <th>Employees</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dep in dep %}
+                <tr>
+                 
+          <td><img src="{{ dep.image }}" style="width:30px; height:30px;"></td>
+                    <td>{{ dep.Department_Name }}</td>
+                    <td>{{ dep.Employees }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</center>
+
+<!--employeedata-->
+  <div class="employee-container">
+    <h2>Employee Data</h2>
+    <table border='2' class="employee-table">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Photo</th>
+          <th>Emplyee</th>
+          <th>Designations</th>
+          <th>Department</th>
+          <th>Pass Type</th>
+          <th>IC No</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for add in add %}
+        <tr>
+          <td>{{ add.id }}</td>
+         <td><img src="{{ i.photograph }}" style="width:30px; height:30px;"></td>
+          <td>{{ add.employment_type }}</td>
+          <td>{{ add.designation }}</td>
+          <td>{{ add.department}}</td>
+          <td>{{ add.postal_code }}</td>
+          <td>{{ add.ic_no }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+<!--costcenter-->
+
+  <div class="employee-container">
+    <h2>CostCenter</h2>
+    <table border='2' class="employee-table">
+      <thead>
+        <tr>
+          <th>Cost Center</th>
+          <th>Description</th>
+          <th>Percentage</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for cc in cc %}
+        <tr>
+          <td>{{ cc.cost_center }}</td>
+          <td>{{ cc.description }}</td>
+          <td>{{ cc.percentage }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+<!--expenses-->
+  <div class="employee-container">
+    <h2>Expenses</h2>
+    <table border='2' class="employee-table">
+      <thead>
+        <tr>
+          <th>Amount</th>
+          <th>Issue Date</th>
+          <th>Desciption</th>
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+        {% for exp in exp %}
+        <tr>
+          <td>{{ exp.Amount }}</td>
+          <td>{{ exp.Issue_Date }}</td>
+          <td>{{ exp.description }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+<!--Inventory-->
+ <div class="employee-container">
+    <h2>Inventory</h2>
+    <table border='2' class="employee-table">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Quantity</th>
+          <th>Description</th>
+          <th>Date Of Issue</th>
+          <th>Date Of Collection</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for inv in inv %}
+        <tr>
+          <td>{{ inv.Item_Name }}</td>
+          <td>{{ inv.Quantity}}</td>
+          <td>{{ inv.Description}}</td>
+          <td>{{ inv.Date_Of_Issue}}</td>
+          <td>{{ inv.Date_Of_Collection}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+<!--Training-->
+ <div class="employee-container">
+    <h2>Training</h2>
+    <table border='2' class="employee-table">
+      <thead>
+        <tr>
+          <th>Certification</th>
+          <th>Grade</th>
+          <th>Effective Date</th>
+          <th>Projected Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for training in training %}
+        <tr>
+          <td>{{ training.Certification }}</td>
+          <td>{{ training.Grade}}</td>
+          <td>{{ training.Effective_Date}}</td>
+          <td>{{ training.Projected_Date}}</td>
+          <td>{{ training.Status}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5">
+                    <p>Privacy Policy</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Copyright © 2024 QuickHR All rights reserved</p>
+                </div>
+                <div class="col-md-3">
+                    <p>Designed and Developed  BUSINESS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and Font Awesome JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Script to handle sidebar toggle on mobile
+        document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        // Script to handle scroll down button functionality
+        document.querySelector('.scroll-down-btn').addEventListener('click', function() {
+            window.scrollBy(0, 100); // Adjust the scroll distance as needed
+        });
+    </script>
+</body>
+</html>

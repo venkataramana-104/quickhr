@@ -1,0 +1,182 @@
+{%extends "uapp/home.html"%}
+{%load static%}
+{% block extra_css %}
+<style>
+	h2{
+		font-size: 20px;
+		margin-left: 74%;
+		margin-top: 5px;
+	}
+    .saa{
+        margin-left: 74%;
+    }
+	.app{
+		width:150px;
+		height: 160px;
+		background-color: white;
+		display: inline-block;
+		margin-left: 20px;
+		margin-top: 10px;
+	}
+    
+
+	p{
+		font-size: 12px;
+	}
+
+
+ .bar1 {
+        display: inline-block;
+        width: 0;
+        height: 30px; 
+        margin: 5px 0;
+        background-color: red; 
+        transition: width 1s ease; 
+    }
+     .bar2 {
+        display: inline-block;
+        width: 0;
+        height: 30px; 
+        margin: 5px 0;
+        background-color: blue; 
+        transition: width 1s ease; 
+    }
+     .bar3 {
+        display: inline-block;
+        width: 0; /* Initial width will be set by inline style */
+        height: 30px; /* Height of each bar */
+        margin: 5px 0;
+        background-color: green; /* Green color for completed bars */
+        transition: width 1s ease; /* Smooth animation */
+    }
+      .bar6 {
+        display: inline-block;
+        width: 0; 
+        height: 30px; 
+        margin: 5px 0;
+        background-color: orange; 
+        transition: width 1s ease;
+    }
+  
+     .bar5 {
+        display: inline-block;
+        width: 0; 
+        height: 30px; 
+        margin: 5px 0;
+        background-color: dodgerblue; 
+        transition: width 1s ease;
+    }
+    
+    .bar-total {
+        background-color: #2196F3; 
+    }
+    
+    .bar-label {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+    
+    .chart-container {
+       max-width: 80%; 
+        margin: 20px auto; 
+    }
+    .vcx{
+    	background-color: white;
+    	margin-top: 20px;
+    	max-width: 100%;
+    	max-height: 100%;
+    	margin-left: 12px;
+    }
+    h4{
+    	margin-top: -50px;
+    }
+
+
+</style>
+{%endblock%}
+{%block body_block%}
+<h2> <i class="fas fa-home"></i>/Appraisal</h2>
+<button class="saa">Create Appraisal</button>
+<div class="app">
+	<p>APPRAISALS LIST</p>
+	<hr>
+	<center>
+	<img src="{%static  "images/circle.png"%}"  width="100px" height="80px" >
+	<h4>1</h4>
+    </center>
+</div>
+<div class="app">
+		<P>MANAGER REVIEWS</P>
+		<hr>
+		<center>
+		<img src="{%static  "images/circle.png"%}"  width="100px" height="80px" >
+		<h4>0</h4>
+        </center>
+</div>
+<div class="app">
+		<P>HR MANAGER REVIEWS</P>
+		<hr>
+		<center>
+		<img src="{%static  "images/circle.png"%}"  width="100px" height="80px" >
+		<h4>12</h4>
+        </center>
+</div>
+<div class="app">
+		<P>COMPLETED</P>
+		<hr>
+		<center>
+		<img src="{%static  "images/circle.png"%}"  width="100px" height="80px" >
+		<h4>43</h4>
+        <center>
+</div>
+	<div class="app">
+		<P>CREATED APPRAISALIST</P>
+		<hr>
+		<center>
+		<img src="{%static  "images/circle.png"%}"  width="100px" height="80px" >
+		<h4>199</h4>
+        </center>
+</div>
+<div class="app">
+		<P>TEMPLATES</P>
+		<hr>
+        <center>
+
+		<img src="{%static  "images/circle.png"%}"  width="100px" height="80px" >
+		<h4>199</h4>
+       </center>
+</div>
+
+<div class="vcx">
+
+	<center>
+<h3>APPRAISALS PREVIEW</h3>
+</center>
+
+<div class="chart-container">
+    <div class="bar-label">Total Approvals:</div>
+    <div class="bar1 bar-total" style="width: 100px;"></div>
+    <br>
+
+    <div class="bar-label">Completed Approvals:</div>
+    <div class="bar2" style="width:0;"></div>
+    <br>
+
+    <div class="bar-label">HR Manager Applications:</div>
+    <div class="bar3" style="width: 240px;"></div>
+    <br>
+
+    <div class="bar-label">Manager Appraisal List:</div>
+    <div class="bar6" style="width: 350px;"></div>
+    <br>
+
+    <div class="bar-label">Employee Appraisal List:</div>
+    <div class="bar5" style="width: 400px;"></div>
+    <br>
+</div>
+
+</div>
+
+
+{%endblock%}
+

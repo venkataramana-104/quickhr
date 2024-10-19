@@ -1,0 +1,142 @@
+{% extends "uapp/home.html" %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .employees {
+    width: 95%;
+    background-color: whitesmoke;
+    margin: 30px auto;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+
+  .ram {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .ram p {
+    margin: 10px;
+    font-size: 17px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
+
+  .dropdown-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dropdown-container p,
+  .dropdown-container select,
+  .dropdown-container button {
+    margin: 10px;
+  }
+
+  .dropdown-container p {
+    margin-left: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  table, th, td {
+    border: 2px solid black;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  p:hover {
+    color: orange;
+  }
+
+  .butt {
+    margin: 10px 0;
+    margin-left: 90%;
+    margin-top: -60px;
+  }
+
+  .butt button {
+    width: 100px;
+    height: 30px;
+  }
+
+  .employee-table {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .ram {
+      flex-direction: column;
+    }
+
+    .dropdown-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .butt button {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .employees {
+      padding-left: 10px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block body_block %}
+  <div class="employee-container">
+    <h2>Timesheets</h2>
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Employee</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if f %}
+          {% for i in f %}
+            <tr>
+              <td>{{ i.employee_id }}</td>
+              <td>{{ i.employee_name }}</td>
+              <td>{{ i.status }}</td>
+              <td><button>Action</button></td>
+            </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="4">No records found</td>
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

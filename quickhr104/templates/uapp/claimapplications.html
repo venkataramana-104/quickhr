@@ -1,0 +1,118 @@
+{% extends "uapp/home.html" %}
+{% load static %}
+
+{% block body_block %}
+{% block extra_css %}
+<style>
+    /* Adjustments for screens smaller than 768px */
+    @media (max-width: 768px) {
+
+       
+    }
+
+    /* Styling for the employee table container */
+    .employee-container {
+        margin: 20px 0;
+        margin-left: 80px;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .employee-table th,
+    .employee-table td {
+        padding: 8px 12px;
+        text-align: left;
+        border: 1px solid #ddd; /* Added border for clarity */
+    }
+
+    .employee-table th {
+        background-color: #f2f2f2;
+    }
+
+    @media (max-width: 768px) {
+        .employee-table th,
+        .employee-table td {
+            padding: 6px 8px;
+        }
+
+        .employee-table th {
+            font-size: 14px;
+        }
+
+        .employee-table td {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .employee-table th,
+        .employee-table td {
+            display: block;
+            text-align: right;
+        }
+
+        .employee-table th::before {
+            content: attr(data-title);
+            float: left;
+            font-weight: bold;
+        }
+
+        .employee-table th,
+        .employee-table td {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .employee-table th:last-child,
+        .employee-table td:last-child {
+            border-bottom: 0;
+        }
+    }
+</style>
+{% endblock %}
+<center>
+
+<div class="employee-container">
+    <h2>Claim Data</h2>
+    <div class="table-responsive">
+        <table class="employee-table">
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Claim Type</th>
+                    
+                    <th>Project</th>
+                    
+                    <th>Receipt ID</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in f %}
+                <tr>
+                    <td data-label="Employee">{{ i.employee }}</td>
+                    <td data-label="Claim Type">{{ i.claim_type }}</td>
+                    
+                    <td data-label="Project">{{ i.project }}</td>
+                   
+                    <td data-label="Receipt ID">{{ i.receipt_id }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</center>
+
+{% endblock %}

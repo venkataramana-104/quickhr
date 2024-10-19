@@ -1,0 +1,472 @@
+{% extends 'uapp/home.html' %}
+{% block body_block %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .notification-count {
+        background-color: lightsteelblue;
+        width: 230px;
+        height: 30px;
+        margin: 0 auto;
+        text-align: center;
+        margin-left: 55%;
+        margin-top: 10px;
+    }
+
+    .dashboard-heading {
+        text-align: center;
+    }
+
+    .welcome-container {
+        max-width: 1100px;
+        background-color: white;
+        margin: 20px auto;
+        padding: 10px;
+        border: 2px solid lightgray;
+        text-align: left;
+        border-radius: 2px;
+    }
+
+    .welcome-text {
+        color: orange;
+        font-size: 20px;
+        margin-left: 80px;
+        margin-top: -50px;
+    }
+    h2{
+      margin-left: 80px;
+      font-size: 14px;  
+    }
+
+    .circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: conic-gradient(red, yellow, blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 10px;
+    }
+
+    .box {
+        padding: 30px;
+        text-align: center;
+    }
+
+    .box h6 {
+        margin-top: 10px;
+    }
+
+    .large-container {
+        height: 700px;
+    }
+
+    .d-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .horizontal-box, .vertical-box {
+        flex: 1;
+        min-width: 250px;
+        margin: 10px;
+        
+    }
+    .vertical-box {
+        height: 340px
+    }
+
+    .horizontal-box {
+        height: 400px;
+    }
+
+    @media (max-width: 768px) {
+        .notification-count, .dashboard-heading, .welcome-container, .box {
+            margin-left: 0;
+        }
+
+        .circle {
+            width: 40px;
+            height: 40px;
+        }
+        
+    }
+    h5{
+        font-size: 13px;
+       padding-right: 40px;
+    }
+    h6{
+       font-size: 13px;
+       padding-right: 180px; 
+    }
+    h1{
+        margin-left: 75%;
+        font-size: 15px;
+        margin-top: -23px;
+    }
+    .circles{
+        text-align: left;
+    }
+.table{
+    background-color: lightsteelblue;
+   
+}
+
+
+
+</style>
+{% endblock %}
+
+<div class="notification-count">
+    <p>Today Notifications count: 393</p>
+</div>
+
+<div class="dashboard-heading">
+    <h1><i class="fas fa-home"></i> Dashboard</h1>
+</div>
+
+<div class="welcome-container">
+    <img src="{% static 'images/r.png' %}" width="60px" height="60px">
+    <h5 class="welcome-text">Welcome, Ramana C</h5>
+    <h2>CVR Towers, Velpur, India 534222</h2>
+</div>
+
+<div class="container my-4">
+    <div class="row d-flex">
+        <div class="col-md-3">
+            <div class="box bg-white border rounded">
+                <div class="circles">
+                    <img src="{% static 'images/color1.png' %}" width="60px" height="60px">
+                </div>
+                <hr>
+                <a href="/leave"><h6>Leave</h6></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box bg-white border rounded">
+                <div class="circles">
+                    <img src="{% static 'images/color1.png' %}" width="60px" height="60px">
+                </div>
+                <hr>
+                <a href="/claim"><h6>Claim</h6></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box bg-white border rounded">
+                <div class="circles">
+                    <img src="{% static 'images/color1.png' %}" width="60px" height="60px">
+                </div>
+                <hr>
+                <a href="#"><h6>Payslips</h6></a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box bg-white border rounded">
+                <div class="d-flex align-items-center justify-content-center">
+                    <i class="fas fa-clock fa-4x me-2"></i>
+                    <div id="current-time">12:00</div>
+                </div>
+                <hr>
+                <h6>Clock</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="row d-flex">
+        <div class="col-md-8">
+            <div class="box bg-white border rounded large-container">
+                <h6>Large Container Box</h6>
+                <hr>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://calendar.google.com/calendar/embed?src=your_calendar_id" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+                <hr>
+                <div id="hbox">
+                    <center>
+                        <p>21 Aug</p>
+                    </center>
+                </div>
+                <div id="vbox">
+                    <center>
+                        <p>Aa Karuna's 21/08/2024 - Half Day - A.M Annual Leave Pending</p>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="box bg-white border rounded mb-3 vertical-box">
+                <h6>Department</h6>
+                <hr>
+                <table class="table table-bordered table-striped table-sm">
+                <thead >
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.department}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+       
+                <!-- Content for vertical box 1 -->
+            </div>
+            <div class="box bg-white border rounded vertical-box">
+                <h6>Direct Subordinates</h6>
+                <hr>
+
+                <table class="table table-bordered table-striped table-sm">
+                <!-- Content for vertical box 2 -->
+                 <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.first_name}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="row d-flex">
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Task</h5>
+             <hr>
+             <table class="table table-bordered table-striped table-sm">
+              <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.tests}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Company Documents</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.academic_qualification}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Work Permit Expiry Dates</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+                  <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.last_name}}</td>
+            <td>{{ add.joining_date}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+        </div>
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="row d-flex">
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Birthdays</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+             <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.first_name}}</td>
+            <td>{{ add.date_of_birth}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Employee Contract Due Date</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.first_name}}</td>
+            <td>{{ add.probation_period}}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Documents Expiry</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+            <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.first_name}}</td>
+            <td>{{ add.last_working_day}}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
+        </div>
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="row d-flex">
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Employees Confirmation</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+               <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.first_name}}</td>
+            <td>{{ add.confirmation_date}}</td>
+        </tr>
+        </tbody>
+    {% endfor %}
+</table>
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Off In Lieu Expiry Dates</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+               <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{ add.first_name}}</td>
+            <td>{{ add.last_working_day}}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Training Due</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+               <thead>
+                    <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            
+            <td>{{ add.joining_date}}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+        </div>
+    </div>
+</div>
+
+<div class="container my-4">
+    <div class="row d-flex">
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Inventory Due</h5>
+            <hr>
+            <table class="table table-bordered table-striped table-sm">
+                <thead>
+                <tr></tr>
+                </thead>
+                <tbody>
+        {% for inv in inv %}
+        <tr>
+            <td>{{inv.Item_Name}}</td>
+            <td>{{inv.Date_Of_Collection}}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+        </div>
+        <div class="horizontal-box box bg-white border rounded">
+            <h5>Employees Long Service List</h5>
+            <hr>
+           <table class="table table-bordered table-striped table-sm">
+                <thead>
+                <tr></tr>
+                </thead>
+                <tbody>
+        {% for add in add %}
+        <tr>
+            <td>{{add.first_name}}</td>
+            <td>{{add.joining_date}}</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+        </div>
+      
+    </div>
+</div>
+
+
+<script>
+    // Function to update the current time
+    function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+
+    // Initialize calendar (example with Flatpickr)
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#calendar", {
+            dateFormat: "d-m-Y",
+            mode: "single",
+        });
+    });
+</script>
+
+{% endblock %}

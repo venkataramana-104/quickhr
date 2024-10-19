@@ -1,0 +1,61 @@
+{% extends 'uapp/home.html' %}
+{% block body_block %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        text-align: center;
+        padding-top: 40px;
+    }
+
+    .info-box {
+        font-size: 1.2em;
+        margin: 10px auto; /* Center the margin */
+        text-align: center;
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%; /* Full width */
+        max-width: 500px; /* Adjust for smaller screens */
+        margin-left: 40px;
+    }
+
+    h2 {
+        padding-left: 30px;
+        padding-top: 30px;
+        text-align: center; /* Center align the heading */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 2em; /* Smaller font for mobile */
+        }
+
+        .info-box {
+            font-size: 1em; /* Smaller font for mobile */
+            padding: 12px; /* Reduced padding for mobile */
+            width: 90%; /* Use 90% width on mobile */
+        }
+
+        h2 {
+            padding-left: 0; /* Remove padding on mobile */
+            padding-right: 0; /* Remove right padding on mobile */
+        }
+    }
+</style>
+{% endblock %}
+
+<body>
+    <div style="text-align: center;">
+        <h2>USER LOGIN LIST:</h2>
+        <p class="info-box">Total users: {{ total_users }}</p>
+        <p class="info-box">Users logged in today: {{ logged_in_today }}</p>
+    </div>
+</body>
+
+{% endblock %}

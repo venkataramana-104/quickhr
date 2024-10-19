@@ -1,0 +1,122 @@
+
+{% extends "uapp/home.html" %}
+{% load static %}
+
+{% block body_block %}
+{% block extra_css %}
+<style>
+    /* Adjustments for screens smaller than 768px */
+    @media (max-width: 768px) {
+
+       
+    }
+
+    /* Styling for the employee table container */
+    .employee-container {
+        margin: 20px 0;
+        margin-left: 80px;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .employee-table th,
+    .employee-table td {
+        padding: 8px 12px;
+        text-align: left;
+        border: 1px solid #ddd; /* Added border for clarity */
+    }
+
+    .employee-table th {
+        background-color: #f2f2f2;
+    }
+
+    @media (max-width: 768px) {
+        .employee-table th,
+        .employee-table td {
+            padding: 6px 8px;
+        }
+
+        .employee-table th {
+            font-size: 14px;
+        }
+
+        .employee-table td {
+            font-size: 12px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .employee-table th,
+        .employee-table td {
+            display: block;
+            text-align: right;
+        }
+
+        .employee-table th::before {
+            content: attr(data-title);
+            float: left;
+            font-weight: bold;
+        }
+
+        .employee-table th,
+        .employee-table td {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .employee-table th:last-child,
+        .employee-table td:last-child {
+            border-bottom: 0;
+        }
+    }
+     .hhh {
+        font-size: 17px;
+        color: black;
+        margin-left: 0;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+<a class="hhh" href="/timesheet">
+    <i class="fa fa-home"></i> / Timesheet / Daily TimeSheet
+</a>
+<center>
+<div class="timesheet-data-container">
+  <h2 class="text-center"> Approve TimeSheet</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+           <thead class="thead-light">
+        <tr>
+          <th>Employee Id</th>
+          <th>Employee</th>
+          <th>Total Hours</th> 
+          <th>Actual Hours</th>
+        </tr>
+      </thead>
+             <tbody>
+        {% for i in f %}
+        <tr>
+          <td>{{ i.id}}</td>
+          <td>{{ i.Employee}}</td>
+          <td>{{ i.Total_OT_Hours}}</td>
+          <td>{{ i.Hourly_OT}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+        </table>
+       
+    </div>
+</div>
+</center>
+
+{% endblock %}

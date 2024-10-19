@@ -1,0 +1,234 @@
+{%extends "uapp/home.html"%}
+{%load static%}
+{% block extra_css %}
+<style>
+    h4{
+		font-size: 16px;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		padding-top: 4px;
+	}
+     .icon {
+      font-size: 40px; 
+      margin-left: 70px;
+      padding-top:  40px;
+    }
+    .raman{
+    background-color: white;
+    width: 200px;
+    margin-top: 40px;
+    height: 40px;
+}
+
+.ramana1{
+    width: 200px;
+    background-color: blue;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+
+.ramana2{
+    width: 200px;
+    background-color: red;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+
+
+.ramana3{
+    width: 200px;
+    background-color: brown;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+
+.ramana4{
+    width: 200px;
+    background-color: lightgreen;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana5{
+    width: 200px;
+    background-color: lightgrey;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana6{
+    width: 200px;
+    background-color: lightblue;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana7{
+    width: 200px;
+    background-color: lightcoral;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana8{
+    width: 200px;
+    background-color: lightsteelblue;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana9{
+    width: 200px;
+    background-color: lightgoldenrodyellow;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana10{
+    width: 200px;
+    background-color: lightseagreen;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana11{
+    width: 200px;
+    background-color: papayawhip;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana12{
+    width: 200px;
+    background-color: lightpink;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana13{
+    width: 200px;
+    background-color: lightskyblue;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+.ramana14{
+    width: 200px;
+    background-color: lightslategrey;
+    margin: 30px;
+    height: 130px;
+    display: inline-block;
+}
+</style>
+{%endblock%}
+
+
+
+{%block body_block%}
+
+
+<div class="ramana1">
+	<i class="fas fa-user-plus icon"></i>
+	<div class="raman">
+	<a href="/createroster"><h4>Create Roster</h4></a>
+</div>
+</div>
+
+<div class="ramana2">
+	<i class="fas fa-list-alt icon"></i>
+	<div class="raman">
+<a href="/viewroster">	<h4>View Roster</h4></a>
+</div>
+</div>
+
+<div class="ramana3">
+	<i class="fas fa-clock icon"></i> 
+	<div class="raman">
+<a href="/importanttimesheet"><h4>Import Timesheet</h4></a>
+</div>
+</div>
+
+<div class="ramana4">
+	<i class="fas fa-calendar-plus icon"></i> 
+	<div class="raman">
+	<a href="/atimesheet"> <h4>Add Timesheet</h4></a>
+</div>
+</div>
+
+<div class="ramana5">
+	<i class="fas fa-calendar-check icon"></i>
+	<div class="raman">
+	<h4>Schedule Timesheet</h4>
+</div>
+</div>
+
+<div class="ramana6">
+	<i class="fas fa-calendar-day icon"></i>
+	<div class="raman">
+<a href="/dailytimesheet"><h4>Daily Timesheet</h4></a>
+</div>
+</div>
+
+<div class="ramana7">
+	<i class="far fa-calendar-alt icon"></i>
+	<div class="raman">
+	<a href="/monthlytimesheet"><h4>Monthly Timesheet</h4></a>
+</div>
+</div>
+
+<div class="ramana8">
+	<i class="fas fa-check-circle icon"></i>
+	<div class="raman">
+<a href="/approvetimesheet"><h4>Approve Timesheet</h4></a>
+</div>
+</div>
+
+<div class="ramana9">
+	<i class="fas fa-clock icon"></i>
+	<div class="raman">
+	<a href="/overtimehourse"><h4>Overtime Hours</h4></a>
+</div>
+</div>
+
+<div class="ramana10">
+	<i class="fas fa-clock icon"></i> 
+	<div class="raman">
+<a href="/manageshifts"><h4>Shifts</h4></a>
+</div>
+</div>
+<div class="ramana11">
+	<i class="far fa-address-book icon"></i>
+	<div class="raman">
+<a href="/projectattendance"><h4>Project Attendance</h4></a>
+</div>
+</div>
+
+<div class="ramana12">
+	<i class="fas fa-male icon"></i>
+	<div class="raman">
+	<a href="/biometric"><h4>Biometric Log</h4></a>
+</div>
+</div>
+
+
+
+<div class="ramana13">
+	<i class="far fa-calendar-alt icon"></i>
+	<div class="raman">
+<a href="/ottimesheet"><h4>OT Timesheet</h4></a>
+</div>
+</div>
+<!--
+<div class="ramana14">
+	<i class="fas fa-calendar-check icon"></i>
+	<div class="raman">
+	<h4>BETASchedule Timesheet</h4>
+</div>
+</div>
+-->
+
+{%endblock%}

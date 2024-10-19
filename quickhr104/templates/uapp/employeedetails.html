@@ -1,0 +1,145 @@
+{% extends 'uapp/home.html' %}
+{% load static %}
+{% block body_block %}
+{% block extra_css %}
+<style>
+    .employee-container {
+        padding: 20px;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    .employee-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    .employee-table th, .employee-table td {
+        border: 2px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        word-break: break-word; /* Handles long text in table cells */
+    }
+
+    .employee-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .employee-table td a {
+        text-decoration: none;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    .btn-update {
+        background-color: #4CAF50; /* Green */
+    }
+
+    .btn-delete {
+        background-color: #f44336; /* Red */
+    }
+
+    .btn-add {
+        background-color: #2196F3; /* Blue */
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+    .actions {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .employee-table, .employee-table thead, .employee-table tbody, .employee-table th, .employee-table td, .employee-table tr {
+            display: block;
+            width: 100%;
+        }
+
+        .employee-table thead {
+            display: none;
+        }
+
+        .employee-table tr {
+            margin-bottom: 10px;
+            display: block;
+            border: 1px solid #ddd;
+        }
+
+        .employee-table td {
+            text-align: right;
+            position: relative;
+            padding-left: 50%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .employee-table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 50%;
+            padding-left: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+            background-color: #f2f2f2; /* Background for labels */
+        }
+
+        .employee-table td a {
+            display: block;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+<div class="employee-container">
+    <h2>Employee Data</h2>
+    <table class="employee-table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Position</th>
+                <th>Gender</th>
+                <th>Date of Hire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in f %}
+            <tr>
+                <td data-label="First Name">{{ i.first_name }}</td>
+                <td data-label="Last Name">{{ i.last_name }}</td>
+                <td data-label="Email">{{ i.email }}</td>
+                <td data-label="Department">{{ i.department }}</td>
+                <td data-label="Role">{{ i.role }}</td>
+                <td data-label="Position">{{ i.position }}</td>
+                <td data-label="Gender">{{ i.gender }}</td>
+                <td data-label="Date of Hire">{{ i.joining_date }}</td>
+                <td data-label="Actions">
+                    <a href="/update/{{ i.id }}" class="btn btn-update">Update</a>
+                    <a href="/delete/{{ i.id }}" class="btn btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="actions">
+        <a href="/employee" class="btn btn-add">Add Employee</a>
+    </div>
+</div>
+{% endblock %}

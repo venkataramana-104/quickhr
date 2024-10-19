@@ -1,0 +1,123 @@
+{% extends "uapp/home.html" %}
+{% load static %}
+
+{% block body_block %}
+{% block extra_css %}
+<style>
+.leave-data-container {
+    padding: 20px;
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+@media (max-width: 767px) {
+    .table-responsive {
+        border: 0;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .table td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        border-bottom: 1px solid #dee2e6;
+        position: relative;
+        padding-left: 50%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding-left: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #6c757d;
+    }
+
+    .table td:last-child {
+        border-bottom: 0;
+    }
+}
+</style>
+{% endblock %}
+<div class="leave-data-container">
+    <h2 class="text-center">Pending approval data</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>EMPLOYEE</th>
+                    <th>LEAVETYPE</th>
+                    <th>BALANCE LEAVE</th>
+                    <th>FROM DATE</th>
+                    <th>TO DATE</th>
+                    
+                    <th>NO OF DAYS APPLYING</th>
+                    
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in f %}
+                <tr>
+                    <td data-label="EMPLOYEE">{{ i.Employee }}</td>
+                    <td data-label="LEAVETYPE">{{ i.Leavetype }}</td>
+                    <td data-label="BALANCE LEAVE">{{ i.Balance_Leave }}</td>
+                    <td data-label="FROM DATE">{{ i.From_Date }}</td>
+                    <td data-label="TO DATE">{{ i.To_Date }}</td>
+                    
+                    <td data-label="NO OF DAYS APPLYING">{{ i.No_ofdaysapplying }}</td>
+                    
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

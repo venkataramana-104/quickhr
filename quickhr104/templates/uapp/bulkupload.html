@@ -1,0 +1,193 @@
+{% extends 'uapp/home.html' %}
+{% load static %}
+{% block body_block %}
+
+{% block extra_css %}
+<style>
+    .form-responsive {
+        max-width: 450px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: whitesmoke;
+    }
+
+    .form-responsive input[type="submit"] {
+        display: block;
+        width: 100%;
+        max-width: 150px;
+        margin: 20px auto 0;
+        padding: 10px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+
+    }
+
+    .form-responsive input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .form-responsive p {
+        margin-bottom: 0;
+    }
+
+    .form-responsive input[type="text"],
+    .form-responsive input[type="email"],
+    .form-responsive input[type="password"],
+    .form-responsive select,
+    .form-responsive textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+        .form-responsive {
+            padding: 10px;
+        }
+
+        .form-responsive input[type="submit"] {
+            max-width: 100%;
+        }
+
+        .hhh {
+            font-size: 14px;
+            text-align: center;
+            margin-left: 0;
+        }
+
+        .responsive-box {
+            padding: 15px;
+        }
+
+        .employees {
+            padding-left: 0;
+        }
+
+        .ram a {
+            font-size: 14px;
+            padding: 10px;
+            display: block;
+            text-align: center;
+            width: 100%;
+        }
+
+        .ram1 {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .small-input-form input,
+        .small-input-form select,
+        .small-input-form textarea,
+        .small-input-form button {
+            width: 100%;
+            font-size: 1rem;
+            padding: 10px;
+        }
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .hhh {
+        font-size: 17px;
+        color: black;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .responsive-box {
+        width: 100%;
+        max-width: 1105px;
+        margin-top: 20px;
+        background-color: white;
+        border: 1px solid #ddd;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        box-sizing: border-box;
+       margin-left: 40px;
+    }
+
+    .employees {
+        width: 100%;
+        padding-left: 40px;
+    }
+
+    .ram {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .ram a {
+        margin: 10px;
+        font-size: 12px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .ram a:hover {
+        color: orange;
+    }
+
+    .ram a:visited {
+        color: black;
+    }
+
+    .ram a:active {
+        color: orange;
+    }
+
+    .ram1 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 15px;
+    }
+
+    .small-input-form input,
+    .small-input-form select,
+    .small-input-form textarea {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+        height: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .small-input-form button {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+<a class="hhh" href="/bulkuploaddata">
+    <i class="fa fa-home"></i> / bulkupload / upload
+</a>
+
+<div class="container form-container">
+    <div class="responsive-box">
+        <div class="form-responsive">
+            <h2>UPLOAD</h2>
+            <hr>
+            <form method="post" enctype="multipart/form-data" class="small-input-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
